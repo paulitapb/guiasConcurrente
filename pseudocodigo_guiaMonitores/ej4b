@@ -1,0 +1,21 @@
+Monitor atrapador(){
+	Int cant_esperando = 0; 
+	Condition esperando; 
+    condition esperando_para_liberar; 
+	esperar(){
+		cant_esperando++
+		esperando.wait()
+	}
+
+	liberar(int N){
+		If(cant_esperando >= N){
+	        esperando.signal(N) //como hago para aca liberar a los que estaban esperando??
+                                //si es fair la cola esto anda pero no sabemos 
+	        Cant_esperando -= N
+            esperando_para_liberar.signal()
+        }
+        else{ //cant_esperando < N
+            esperando_para_liberar.wait()
+        }
+    }
+}
